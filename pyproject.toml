@@ -1,7 +1,7 @@
 [project]
 name = "eu-regulatory-intelligence"
 version = "0.1.0"
-description = "Add your description here"
+description = "Evidence-grounded research on EU regulation with verifiable citations and retrieval evaluation."
 readme = "README.md"
 requires-python = "==3.15"
 dependencies = []
