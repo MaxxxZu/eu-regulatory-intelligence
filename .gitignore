@@ -1,0 +1,15 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Local implementation plan
+/docs/IMPLEMENTATION_PLAN.md
+/docs/PROJECT_BRIEF.md
+/docs/START_PROMPT.md
