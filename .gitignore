@@ -9,6 +9,12 @@ wheels/
 # Virtual environments
 .venv
 
+# Local secrets
+.env
+
+# Ruff cache
+.ruff_cache/
+
 # Local implementation plan
 /docs/IMPLEMENTATION_PLAN.md
 /docs/PROJECT_BRIEF.md

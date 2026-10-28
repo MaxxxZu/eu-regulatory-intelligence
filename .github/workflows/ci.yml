@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ruff:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v10
+        with:
+          version: "0.13.6"
+          enable-cache: false
+      - name: Install pinned Python
+        run: uv python install
+      - name: Install lint dependencies only
+        run: uv sync --locked --only-group dev --no-build
+      - name: Lint
+        run: uv run --locked --only-group dev ruff check . --output-format=github
+      - name: Check formatting
+        run: uv run --locked --only-group dev ruff format --check .
+      - name: Validate pre-commit configuration
+        run: uv run --locked --only-group dev pre-commit validate-config
