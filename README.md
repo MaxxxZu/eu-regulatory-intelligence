@@ -1,28 +1,29 @@
 # EU Regulatory Intelligence
 
-Research on the EU AI Act with verifiable official citations and transparent
-comparison of retrieval strategies.
+An evidence-grounded research tool for the EU AI Act. Designed to help readers
+explore legal provisions, inspect the evidence behind answers, and follow
+citations to the official EUR-Lex text.
 
-## Current status
+The project also provides an engineering view of retrieval quality: how dense,
+sparse and hybrid search find relevant provisions, and when the available
+evidence is insufficient to support an answer.
 
-Available now:
+## Planned capabilities
 
-- A pinned Python environment and dependency lock.
-- A compatibility script for imports, local models and optional OpenAI checks.
-- Ruff lint/formatting and local pre-commit hooks.
-- GitHub Actions configuration for lint and formatting; not yet run on GitHub.
+- Search the original official English edition of the EU AI Act by article,
+  paragraph and point.
+- Ask questions and inspect answers alongside supporting passages and official
+  source links.
+- Validate quoted text and assess whether the evidence supports each claim,
+  withholding answers that fail verification.
+- Compare dense, sparse and hybrid retrieval, with optional reranking.
+- Explore results through a Streamlit research interface and Retrieval Lab.
+- Review reproducible examples and measured evaluation results, including
+  unsupported claims and questions that require abstention.
 
-Planned: document ingestion, dense/sparse/hybrid retrieval, evidence-grounded
-answers with citation verification, and a Streamlit research interface.
-Application functionality is not implemented yet.
-
-## Planned architecture
-
-FastAPI will provide the backend, with Streamlit as its presentation layer.
-LlamaIndex will coordinate retrieval, PostgreSQL will store metadata and durable
-state, and Qdrant will serve the search index. Embeddings and optional reranking
-will run locally through FastEmbed; OpenAI will provide generation and claim
-verification through separate Structured Outputs requests.
+The project is in early development. The repository currently contains the
+Python environment, dependency lock, development tools and CI configuration;
+application features are not implemented yet.
 
 ## Setup
 
@@ -41,16 +42,6 @@ This creates the project environment, including the development tools.
 
 ## Checks
 
-Check runtime compatibility, imports and local model inference:
-
-```bash
-uv run --locked python scripts/check_compatibility.py
-```
-
-The first compatibility run downloads the local models and requires internet
-access. Ordinary runs do not call OpenAI. These synthetic smoke checks establish
-technical compatibility, not retrieval or legal answer quality.
-
 Run lint and formatting checks:
 
 ```bash
@@ -68,21 +59,7 @@ uv run --locked pre-commit run --all-files
 Hooks may fix files; review the resulting changes before continuing.
 CI checks lint, formatting and hook configuration on pushes to `main` and all
 pull requests, using only development dependencies. It does not download models
-or call OpenAI. The workflow has not yet been executed on GitHub Actions.
-
-## Optional OpenAI check
-
-Copy [.env.example](.env.example) to `.env` and fill in `OPENAI_API_KEY` and
-`OPENAI_MODEL`. Keep the key private; `.env` is ignored by Git.
-Load the file explicitly for the live check:
-
-```bash
-uv run --locked --env-file .env python scripts/check_compatibility.py --live
-```
-
-This sends two potentially paid synthetic requests: generation and verification.
-It checks Structured Outputs parsing and validation, not legal quality.
-The configured model is used without an automatic replacement or fallback.
+or call OpenAI.
 
 ## Scope and limitations
 
