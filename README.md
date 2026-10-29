@@ -1,11 +1,70 @@
 # EU Regulatory Intelligence
 
-Research on the EU AI Act with verifiable citations and transparent retrieval evaluation.
+An evidence-grounded research tool for the EU AI Act. Designed to help readers
+explore legal provisions, inspect the evidence behind answers, and follow
+citations to the official EUR-Lex text.
 
-**Status:** initial development. Application functionality is not implemented yet.
+The project also provides an engineering view of retrieval quality: how dense,
+sparse and hybrid search find relevant provisions, and when the available
+evidence is insufficient to support an answer.
 
-**Planned stack:** Python and uv, FastAPI, Streamlit and Plotly, LlamaIndex, PostgreSQL, Qdrant, local embeddings and optional reranking through FastEmbed, and the OpenAI API for generation and claim verification. Compatibility and API access have not been validated.
+## Planned capabilities
 
-v0.1 aims to provide evidence-grounded answers, precise official source links, abstention when evidence is insufficient, and comparison of dense, sparse, and hybrid retrieval. Planned screens cover research, retrieval experiments, evaluation, and sources, with reproducible examples and measured results.
+- Search the original official English edition of the EU AI Act by article,
+  paragraph and point.
+- Ask questions and inspect answers alongside supporting passages and official
+  source links.
+- Validate quoted text and assess whether the evidence supports each claim,
+  withholding answers that fail verification.
+- Compare dense, sparse and hybrid retrieval, with optional reranking.
+- Explore results through a Streamlit research interface and Retrieval Lab.
+- Review reproducible examples and measured evaluation results, including
+  unsupported claims and questions that require abstention.
 
-The initial corpus is limited to the original official English publication of Regulation (EU) 2024/1689 from EUR-Lex. It is a historical edition and does not automatically reflect current law. v0.1 excludes GDPR, additional editions, user document uploads, and compliance certification. Answers are intended for research, not professional legal advice.
+The project is in early development. The repository currently contains the
+Python environment, dependency lock, development tools and CI configuration;
+application features are not implemented yet.
+
+## Setup
+
+Install **uv 0.13.6 or newer** using the
+[official installation instructions](https://docs.astral.sh/uv/getting-started/installation/).
+Python is pinned in
+[.python-version](.python-version), and dependencies are locked in [uv.lock](uv.lock).
+
+From the repository root:
+
+```bash
+uv sync --locked
+```
+
+This creates the project environment, including the development tools.
+
+## Checks
+
+Run lint and formatting checks:
+
+```bash
+uv run --locked ruff check .
+uv run --locked ruff format --check .
+```
+
+Install and run the local hooks:
+
+```bash
+uv run --locked pre-commit install
+uv run --locked pre-commit run --all-files
+```
+
+Hooks may fix files; review the resulting changes before continuing.
+CI checks lint, formatting and hook configuration on pushes to `main` and all
+pull requests, using only development dependencies. It does not download models
+or call OpenAI.
+
+## Scope and limitations
+
+- v0.1 targets the original official English publication of Regulation (EU)
+  2024/1689 from EUR-Lex.
+- This historical text does not guarantee that answers reflect current law.
+- The project is intended for research, not professional legal advice.
+- GDPR and additional editions are outside v0.1.

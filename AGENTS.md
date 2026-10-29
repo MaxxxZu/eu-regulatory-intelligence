@@ -9,4 +9,5 @@
 - Write code, comments, tests, public documentation, and commit messages in English.
 - Use pyproject.toml and uv for dependencies. Add only dependencies needed for the authorized task; verify compatibility rather than inferring it from metadata. Do not silently switch Python versions, model IDs, or providers.
 - Run checks appropriate to the change. Test legal structure, citation integrity, negative evidence, abstention, and integration boundaries when affected. Documentation-only changes do not require application tests. Report actual checks and limitations; never invent metrics or successful runs.
+- Run Ruff lint, format checks, and applicable pre-commit checks before handing Python changes over for review.
 - Inspect the current branch and working tree before editing. Preserve unrelated changes and review the full diff and new files. Do not create commits, push, merge, reset, rebase, force-push, delete branches, or discard work without explicit authorization.
